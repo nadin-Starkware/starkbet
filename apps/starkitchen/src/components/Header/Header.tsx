@@ -32,15 +32,15 @@ export const Header = ({
 
   return (
     <header className="bg-white shadow">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <img
-              src={`${SrcPrefix}/starkitchen-logo-transparent.png`}
+              src={`${SrcPrefix}/starkbet-logo-transparent.webp`}
               alt="StarKitchen Logo"
-              className="h-12"
+              className="h-32"
             />
-            <h1 className="text-3xl font-bold text-gray-900">StarKitchen</h1>
+            <h1 className="text-5xl font-bold text-gray-900">StarkBet</h1>
           </div>
           <div className="flex items-center space-x-4">
             {wallet?.isConnected ? (
