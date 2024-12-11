@@ -34,7 +34,7 @@ Follow these steps to get started with the monorepo and set up your project:
      ```
 
 6. **Update Application Name (optional)**
-   - Replace all occurrences of `"catering-app"` and `"starkitchen"` in the repository with your desired application name. This may include package names, configurations, or deployment references.
+   - Replace all occurrences of `"starkbet"` and `"starkitchen"` in the repository with your desired application name. This may include package names, configurations, or deployment references.
 
 
 7. **Customize Functionality**
@@ -71,7 +71,7 @@ Follow these steps to get started with the monorepo and set up your project:
    - Check the `package.json` file for other available scripts and explore their functionality.
 
 4. **Check your deployed app**
-  - You can see your app live on {your-github-username}.github.io/{repo-name} for example: gilbens-starkware.github.io/catering-app
+  - You can see your app live on {your-github-username}.github.io/{repo-name} for example: gilbens-starkware.github.io/starkbet
 ---
 
 ### Working With the contracts:
@@ -79,7 +79,7 @@ Follow these steps to get started with the monorepo and set up your project:
 1. **Set contract values**
   - After deploying your contract go to `consts.ts` and change the `ABI` and `CONTRACT_ADDRESS` values (see details in the file).
 
-2. **`useAccount` hook** 
+2. **`useAccount` hook**
   - use the `useAccount` hook to get the connected user wallet address.
 
 ```tsx
@@ -94,14 +94,14 @@ export const SomeComponent = () => {
   }
 
   return address ? (
-    <div>{`Wallet Address: ${address}`}</div> 
+    <div>{`Wallet Address: ${address}`}</div>
   ) :  (
     <div>No wallet connected</div>
   )
 };
 ```
 
-3. **ConnectWalletButton** 
+3. **ConnectWalletButton**
   - use the `ConnectWalletButton` in order to display the `Connect Wallet`.
 
 ```tsx
@@ -121,13 +121,13 @@ export const SomeComponent = () => {
       </div>
     );
   }
-  
+
   return <ConnectWalletButton />
 };
 ```
 
 4. **`Read From Contract` with `useReadContract`**
-  - [docs](https://www.starknet-react.com/docs/hooks/use-read-contract) and an example for this hook: 
+  - [docs](https://www.starknet-react.com/docs/hooks/use-read-contract) and an example for this hook:
 
 ```tsx
 import React from 'react';
@@ -136,8 +136,8 @@ import { ABI, CONTRACT_ADDRESS } from "@/utils/consts";
 
 export const SomeComponent = () => {
   const {address, isConnecting} = useAccount();
-  const {data: isAdmin, refetch: getIsAdmin, isFetching} = useReadContract({ 
-    functionName: 'is_admin', 
+  const {data: isAdmin, refetch: getIsAdmin, isFetching} = useReadContract({
+    functionName: 'is_admin',
     enabled: false, // the default is true - if not set to false the api call will happen immediately
     abi: ABI,
     address: CONTRACT_ADDRESS,
@@ -157,7 +157,7 @@ export const SomeComponent = () => {
 ```
 
 4. **`Write To Contract` with `useContract` and `useSendTransaction`**
-  - [useContract docs](https://www.starknet-react.com/docs/hooks/use-contract) and [useSendTransaction docs](https://www.starknet-react.com/docs/hooks/use-read-contract) and an example for this hook: 
+  - [useContract docs](https://www.starknet-react.com/docs/hooks/use-contract) and [useSendTransaction docs](https://www.starknet-react.com/docs/hooks/use-read-contract) and an example for this hook:
 
 ```tsx
 import React from 'react';
@@ -165,7 +165,7 @@ import { useContract, useSendTransaction } from "@starknet-react/core";
 import { ABI, CONTRACT_ADDRESS } from "@/utils/consts";
 
 export const SomeComponent = () => {
-  
+
   const {contract} = useContract({
     abi: ABI,
     address: CONTRACT_ADDRESS,
@@ -180,15 +180,15 @@ export const SomeComponent = () => {
     }
   }, [someData, contract])
 
-  const { sendAsync } = useSendTransaction({ 
-    calls, 
-  });  
+  const { sendAsync } = useSendTransaction({
+    calls,
+  });
 
   const onClick = () => {
     const {transaction_hash} = await sendAsync();
     await contract?.providerOrAccount?.waitForTransaction(transaction_hash, { retryInterval: 2e3 });
   }
-  
+
   return <button onClick={onClick}>click me</button>;
 };
 ```
